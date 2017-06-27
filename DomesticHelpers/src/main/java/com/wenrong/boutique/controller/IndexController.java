@@ -119,4 +119,22 @@ public class IndexController {
         mv.addObject("helpersInfoDAO", helpersInfoDAO);
         return mv;
     }
+
+    @RequestMapping(value = "/bookdomestichelpers", method = RequestMethod.POST)
+    public ModelAndView bookdomestichelpers(
+            @RequestParam("id") String id,
+            @RequestParam("startdate") String startdate,
+            @RequestParam("totaldays") String totaldays){
+
+        List<HelpersInfoDAO> helpersInfoDAOList = getHelperInfo(id, "hi_id");
+        HelpersInfoDAO helpersInfoDAO = helpersInfoDAOList.get(0);
+
+        ModelAndView mv = new ModelAndView("BillingNPaymentPage");
+        mv.addObject("id", id);
+        mv.addObject("startdate", startdate);
+        mv.addObject("totaldays", totaldays);
+        mv.addObject("helpersInfoDAO", helpersInfoDAO);
+        mv.addObject("total", new java.text.DecimalFormat("0.00").format(Double.parseDouble(String.valueOf(Double.parseDouble(totaldays) * Double.parseDouble(helpersInfoDAO.getHi_servicecharge())))));
+        return mv;
+    }
 }

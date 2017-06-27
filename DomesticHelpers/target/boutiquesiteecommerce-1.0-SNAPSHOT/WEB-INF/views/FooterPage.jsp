@@ -20,7 +20,7 @@
 
     <div class="footer-left">
 
-        <h3>Company<span>logo</span></h3>
+        <h3>${companyname}</h3>
 
         <p class="footer-company-name">${companyname} &copy; 2017</p>
     </div>

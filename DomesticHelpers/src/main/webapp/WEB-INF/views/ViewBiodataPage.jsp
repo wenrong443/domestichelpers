@@ -68,7 +68,7 @@
                     <td><b>Service Charge:</b></td>
                     <td>$ ${helpersInfoDAO.hi_servicecharge} /day</td>
                 </tr>
-                <form action="/DomesticHelpers/booking" method="post">
+                <form action="/DomesticHelpers/bookdomestichelpers" method="post">
                     <input name="id" type="text" value="${helpersInfoDAO.hi_id}" hidden>
 
                     <tr>
