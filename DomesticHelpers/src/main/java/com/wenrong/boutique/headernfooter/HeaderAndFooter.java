@@ -1,0 +1,85 @@
+package com.wenrong.boutique.headernfooter;
+
+import com.wenrong.boutique.dao.HelpersTypeDAO;
+import com.wenrong.boutique.utils.DBConnection;
+import com.wenrong.boutique.utils.GlobalClass;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by wenro on 6/26/2017.
+ */
+
+@Controller
+public class HeaderAndFooter {
+    @RequestMapping("/importwebpagelibrary")
+    public ModelAndView importwebpagelibrary(){
+        ModelAndView mv = new ModelAndView("ImportWebPageLibrary");
+        return mv;
+    }
+
+    @RequestMapping("/header")
+    public ModelAndView header(){
+        ModelAndView mv = new ModelAndView("HeaderPage");
+        mv.addObject("companyname", GlobalClass.companyname);
+        mv.addObject("helpersTypeDAOList", getHelperType());
+        return mv;
+    }
+
+    public static List<HelpersTypeDAO> getHelperType(){
+        List<HelpersTypeDAO> helpersTypeDAOList = new ArrayList<HelpersTypeDAO>();
+
+        try {
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+
+            stmt = conn.prepareStatement("SELECT `ht_id`, `ht_type` FROM `helperstype_tbl` WHERE 1");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                HelpersTypeDAO helpersTypeDAO = new HelpersTypeDAO();
+                helpersTypeDAO.setHt_id(rs.getString("ht_id"));
+                helpersTypeDAO.setHt_type(rs.getString("ht_type"));
+                helpersTypeDAOList.add(helpersTypeDAO);
+            }
+
+            try {
+                if (stmt != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return helpersTypeDAOList;
+    }
+
+    @RequestMapping("/footer")
+    public ModelAndView footer(){
+        ModelAndView mv = new ModelAndView("FooterPage");
+        mv.addObject("companyname", GlobalClass.companyname);
+        return mv;
+    }
+}
