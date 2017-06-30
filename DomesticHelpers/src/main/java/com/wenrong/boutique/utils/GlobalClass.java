@@ -10,4 +10,9 @@ public class GlobalClass {
     public static String connectionUrl = "jdbc:mysql://localhost:3306/domestichelpers_db?characterEncoding=utf-8";
     public static String connectionUsername = "root";
     public static String connectionPassword = "";
+
+    public static String smtpHost = "smtp.gmail.com";
+    public static String smtpPort = "465";
+    public static String emailAddress = "domestichelpers443@gmail.com";
+    public static String emailPassword = "Abc123abc";
 }

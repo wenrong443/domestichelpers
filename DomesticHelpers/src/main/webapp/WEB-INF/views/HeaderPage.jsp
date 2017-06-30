@@ -23,7 +23,7 @@
 <body>
 <c:import url="/importwebpagelibrary"/>
 
-<div class="col-md-9">
+<div class="col-md-12">
     <div id='cssmenu' style="z-index: 999">
         <ul>
             <li><a href='#' class="active">${companyname}</a></li>
@@ -32,9 +32,23 @@
                 <ul>
                     <c:forEach items="${helpersTypeDAOList}"
                                var="helpersTypeDAO" varStatus="loop">
-                        <li class=''><a href='/DomesticHelpers/helperscategories?s=${helpersTypeDAO.ht_type}'>${helpersTypeDAO.ht_type}</a></li>
+                        <li class=''><a
+                                href='/DomesticHelpers/helperscategories?s=${helpersTypeDAO.ht_type}'>${helpersTypeDAO.ht_type}</a>
+                        </li>
                     </c:forEach>
                 </ul>
+            </li>
+            <li style="float: right;">
+                <form action="/DomesticHelpers/loginprocess" method="post">
+                    <div class="row" style="margin-top: 8px;">
+                        <input type="text" name="username" placeholder="Username" class="form-control col-md-4"/>&nbsp;
+                        <input type="password" name="password" placeholder="Password" class="form-control col-md-4"/>&nbsp;
+                        <input type="submit" value="Login" class="btn btn-primary  col-md-2"/>
+                    </div>
+                    <div class="row" style="margin-top: 8px;">
+                        <a href="/DomesticHelpers/register"><u>Register new account</u></a>
+                    </div>
+                </form>
             </li>
         </ul>
     </div>

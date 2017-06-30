@@ -14,6 +14,7 @@
 </head>
 <body>
 <c:import url="/importwebpagelibrary"/>
+<c:import url="/headerforadmin"/>
 <div class="container">
     <div class="col-md-8">
         <h4>Add New Domestic Helper</h4>
@@ -46,10 +47,10 @@
                 <tr>
                     <td><b>Religion:</b></td>
                     <td><input type="text" name="ht_religion" class="col-md-12" required></td>
-                </tr
+                </tr>
                 <tr>
                     <td><b>Service Charge:</b></td>
-                    <td>$ &nbsp;<input type="number" step="0.1" name="ht_servicecharge" class="col-md-12" required></td>
+                    <td>$ &nbsp;<input type="number" step="0.1" value="50.0" name="ht_servicecharge" class="col-md-11" required></td>
                 </tr>
                 <tr>
                     <td><b>Profile Picture:</b></td>

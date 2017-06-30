@@ -11,7 +11,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/DomesticHelpers/resources/footerrelated/css/demo.css">
     <link rel="stylesheet" href="/DomesticHelpers/resources/footerrelated/css/footer-distributed-with-address-and-phones.css">
+    <link rel="stylesheet" href="/DomesticHelpers/resources/footerrelated/css/footer-distributed-with-contact-form.css">
     <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
+
+    <script>
+        function myFormSubmit() {
+            document.getElementById("submitBtn").disabled = true;
+            return true;
+        }
+    </script>
 </head>
 
 <body>
@@ -39,16 +47,23 @@
 
         <div>
             <i class="fa fa-envelope"></i>
-            <p><a href="mailto:support@domestichelpers.com">support@domestichelpers.com</a></p>
+            <p><a href="mailto:support@domestichelpers.com">${email}</a></p>
         </div>
 
     </div>
 
     <div class="footer-right">
-        <p class="footer-company-about">
-            <span>About the company</span>
-            Domestic helper is a company to help user can easily find domestic helper.
-        </p>
+
+        <p>Contact Us</p>
+
+        <form action="/DomesticHelpers/contactusprocess" method="post" onsubmit="myFormSubmit()">
+
+            <input type="text" name="email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="abc@example.com"/>
+            <textarea name="message" placeholder="Message"></textarea>
+            <button type="submit" id="submitBtn">Send</button>
+
+        </form>
+
     </div>
 
 </footer>

@@ -148,7 +148,7 @@
 									<table style="margin-left: 12px; margin-top: 12px;">
 											<tr>
 												<td>
-													<p><small><b>${helpersInfoDAO.hi_fullname} (${helpersInfoDAO.hi_category}, Can communicate with ${helpersInfoDAO.hi_languageknown})</small>
+													<p><small><b>${helpersInfoDAO.hi_fullname} (${helpersInfoDAO.hi_category}, can communicate with ${helpersInfoDAO.hi_languageknown}) x ${totaldays} day(s)</small>
 													</p>
 												</td>
 											</tr>

@@ -8,11 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Boutique" />
         <module name="boutiquesiteecommerce" />
+        <module name="DomesticHelpers" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Boutique" target="1.5" />
       <module name="boutiquesiteecommerce" target="1.5" />
+      <module name="DomesticHelpers" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

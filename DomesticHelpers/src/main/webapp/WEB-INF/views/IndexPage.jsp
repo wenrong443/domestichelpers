@@ -19,6 +19,23 @@
         function viewBiodata(value) {
             window.location = "/DomesticHelpers/viewbiodata?id=" + value;
         }
+
+        function checkErrorMessage() {
+            var parts = window.location.search.substr(1).split("&");
+            var $_GET = {};
+            for (var i = 0; i < parts.length; i++) {
+                var temp = parts[i].split("=");
+                $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
+            }
+
+            if ($_GET['msg'] != null) {
+                alert($_GET['msg']);
+            }
+        }
+
+        window.onload = function () {
+            checkErrorMessage();
+        }
     </script>
 </head>
 <body>
@@ -32,14 +49,48 @@
         <c:forEach items="${helpersInfoDAOList}"
                    var="helpersInfoDAO" varStatus="loop">
             <div class="col-md-4" style="text-align: center; margin-top: 16px;">
-                <img src="${helpersInfoDAO.hi_image}" height="220px" width="190px;" alt="${helpersInfoDAO.hi_fullname}'s Image">
+                <img src="${helpersInfoDAO.hi_image}" height="220px" width="190px;"
+                     alt="${helpersInfoDAO.hi_fullname}'s Image">
                 <p class="col-md-12"><b>${helpersInfoDAO.hi_fullname}</b></p>
-                <p class="col-md-12" style="margin-top: -16px;"><i>${helpersInfoDAO.hi_category} (${helpersInfoDAO.hi_jobexperience})</i></p>
-                <p class="col-md-12" style="margin-top: -18px;"><i>Can communicate with ${helpersInfoDAO.hi_languageknown}</i></p>
-                <p class="col-md-12" style="margin-top: -4px;"><button type="button" onclick="viewBiodata(${helpersInfoDAO.hi_id})" class="btn btn-primary"> View Profile</button></p>
+                <p class="col-md-12" style="margin-top: -16px;"><i>${helpersInfoDAO.hi_category}
+                    (${helpersInfoDAO.hi_jobexperience})</i></p>
+                <p class="col-md-12" style="margin-top: -18px;"><i>Can communicate
+                    with ${helpersInfoDAO.hi_languageknown}</i></p>
+                <p class="col-md-12" style="margin-top: -4px;">
+                    <button type="button" onclick="viewBiodata(${helpersInfoDAO.hi_id})" class="btn btn-primary"> View
+                        Profile
+                    </button>
+                </p>
 
             </div>
         </c:forEach>
+    </div>
+    <div class="row"  style="margin-top: 20px;">
+        <p><small>Advertisement</small></p>
+    </div>
+    <div class="row" style="margin-top: -8px">
+
+        <br>
+        <div class="col-md-3">
+            <iframe src="/DomesticHelpers/randomadvertisement">
+
+            </iframe>
+        </div>
+        <div class="col-md-3">
+            <iframe src="/DomesticHelpers/randomadvertisement">
+
+            </iframe>
+        </div>
+        <div class="col-md-3">
+            <iframe src="/DomesticHelpers/randomadvertisement">
+
+            </iframe>
+        </div>
+        <div class="col-md-3">
+            <iframe src="/DomesticHelpers/randomadvertisement">
+
+            </iframe>
+        </div>
     </div>
 </div>
 <c:import url="/footer"/>

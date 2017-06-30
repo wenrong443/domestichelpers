@@ -73,7 +73,7 @@
 
                     <tr>
                         <td><b>Start Date:</b></td>
-                        <td><input name="startdate" type="date" class="col-md-10"/></td>
+                        <td><input name="startdate" type="date" class="col-md-10" required/></td>
                     </tr>
                     <tr>
                         <td><b>Duration:</b></td>
