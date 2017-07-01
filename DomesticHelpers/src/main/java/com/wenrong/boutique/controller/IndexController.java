@@ -112,12 +112,16 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/viewbiodata", method = RequestMethod.GET)
-    public ModelAndView viewbiodata(@RequestParam("id") String id) {
+    public ModelAndView viewbiodata(@RequestParam("id") String id, HttpSession session) {
         List<HelpersInfoDAO> helpersInfoDAOList = getHelperInfo(id, "hi_id");
         HelpersInfoDAO helpersInfoDAO = helpersInfoDAOList.get(0);
 
         ModelAndView mv = new ModelAndView("ViewBiodataPage");
         mv.addObject("helpersInfoDAO", helpersInfoDAO);
+
+        if (session.getAttribute("ci_id") != null){
+            mv.addObject("customerid", session.getAttribute("ci_id"));
+        }
         return mv;
     }
 
@@ -127,9 +131,56 @@ public class IndexController {
             @RequestParam("startdate") String startdate,
             @RequestParam("totaldays") String totaldays, HttpSession session) {
 
+        try {
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+
+            stmt = conn.prepareStatement("SELECT `b_id`, `b_ci_id`, `b_hi_id`, `b_startdate`, " +
+                    "`b_enddate`, `b_duration`, `b_totalamount`, `b_paymentstatus`, `b_personalname`, " +
+                    "`b_email`, `b_address`, `b_country`, `b_state`, `b_city`, `b_zipcode`, `b_cardno` " +
+                    "FROM `booking_tbl` WHERE b_startdate BETWEEN ? AND DATE_ADD(?, INTERVAL ? DAY ) OR b_enddate BETWEEN ? AND DATE_ADD(?, INTERVAL ? DAY )");
+            stmt.setString(1, startdate);
+            stmt.setString(2, startdate);
+            stmt.setString(3, totaldays);
+            stmt.setString(4, startdate);
+            stmt.setString(5, startdate);
+            stmt.setString(6, totaldays);
+
+            System.out.println(stmt);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                return new ModelAndView(new RedirectView("index?msg=This%20helper%20is%20not%20available%20at%20the%20selected%20time."));
+            }
+
+            try {
+                if (stmt != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         if (session.getAttribute("ci_username") == null) {
             return new ModelAndView(new RedirectView("index?msg=Please%20login%20before%20booking."));
         }
+
+
 
         List<HelpersInfoDAO> helpersInfoDAOList = getHelperInfo(id, "hi_id");
         HelpersInfoDAO helpersInfoDAO = helpersInfoDAOList.get(0);

@@ -86,6 +86,21 @@
                     </tr>
 
                 </form>
+                <form action="/DomesticHelpers/sendchitchat" method="get">
+                    <input name="sender" type="text" value="c${customerid}" hidden>
+                    <input name="receiver" type="text" value="m${helpersInfoDAO.hi_id}" hidden>
+
+
+                    <tr>
+                        <td><b>Message:</b></td>
+                        <td><input name="message" type="type" class="col-md-10" placeholder="Please type your message here" required/></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Send" class="btn btn-primary col-md-12"/></td>
+                    </tr>
+
+                </form>
                 </tbody>
             </table>
         </div>

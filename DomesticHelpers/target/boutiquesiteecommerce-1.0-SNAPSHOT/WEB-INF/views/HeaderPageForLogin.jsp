@@ -38,6 +38,7 @@
                     </c:forEach>
                 </ul>
             </li>
+            <li><a href='/DomesticHelpers/displaychitchat'>Message</a></li>
             <li style="float: right;">
                 <form action="/DomesticHelpers/logout" method="post">
                     <div class="row" style="margin-top: 8px;">

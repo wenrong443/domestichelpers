@@ -58,6 +58,17 @@ public class HeaderAndFooter {
         return mv;
     }
 
+    @RequestMapping("/headerforhelper")
+    public ModelAndView headerforhelper(HttpSession session){
+        ModelAndView mv = new ModelAndView("HeaderPageForHelperLogin");
+        mv.addObject("companyname", GlobalClass.companyname);
+
+        if(session.getAttribute("hi_username") != null){
+            mv.addObject("hi_username", session.getAttribute("hi_username"));
+        }
+        return mv;
+    }
+
     public static List<HelpersTypeDAO> getHelperType(){
         List<HelpersTypeDAO> helpersTypeDAOList = new ArrayList<HelpersTypeDAO>();
 

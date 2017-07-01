@@ -16,6 +16,7 @@
     <context:component-scan base-package="com.wenrong.boutique.controller"/>
     <context:component-scan base-package="com.wenrong.boutique.headernfooter"/>
     <context:component-scan base-package="com.wenrong.boutique.admin" />
+    <context:component-scan base-package="com.wenrong.boutique.helper" />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>
