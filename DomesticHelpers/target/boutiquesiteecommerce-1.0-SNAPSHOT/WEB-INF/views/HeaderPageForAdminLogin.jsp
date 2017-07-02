@@ -28,6 +28,7 @@
         <ul>
             <li><a href='#' class="active">${companyname}'s Admin Control</a></li>
             <li><a href='/DomesticHelpers/listofdomestichelpers'>List of Domestic Helper</a></li>
+            <li><a href="/DomesticHelpers/listofbooking">List of Booking</a></li>
             <li><a href='/DomesticHelpers/listoffeedback'>List of Feedback</a></li>
             <li><a href='/DomesticHelpers/listofadvertisement'>List of Advertisement</a></li>
             <li><a href='/DomesticHelpers/sendemailtocustomer'>Broadcast  Email To All Customer</a></li>

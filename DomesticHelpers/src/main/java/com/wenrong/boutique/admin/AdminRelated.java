@@ -2,6 +2,7 @@ package com.wenrong.boutique.admin;
 
 import com.wenrong.boutique.controller.IndexController;
 import com.wenrong.boutique.dao.AdvertisementDAO;
+import com.wenrong.boutique.dao.BookingDAO;
 import com.wenrong.boutique.dao.FeedbackDAO;
 import com.wenrong.boutique.utils.AsyncTaskSendEmail;
 import com.wenrong.boutique.utils.DBConnection;
@@ -792,5 +793,78 @@ public class AdminRelated {
         }
 
         return emailList;
+    }
+
+    public static List<BookingDAO> getBookingDAOList() {
+        List<BookingDAO> bookingDAOList = new ArrayList<BookingDAO>();
+
+        try {
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = null;
+            ResultSet rs = null;
+
+            stmt = conn.prepareStatement("SELECT `b_id`, `b_ci_id`, `b_hi_id`, `b_startdate`, " +
+                    "`b_enddate`, `b_duration`, `b_totalamount`, `b_paymentstatus`, `b_personalname`, " +
+                    "`b_email`, `b_address`, `b_country`, `b_state`, `b_city`, `b_zipcode`, `b_cardno`, " +
+                    "`hi_fullname`, `hi_username` " +
+                    "FROM `booking_tbl` AS A " +
+                    "LEFT OUTER JOIN helpersinfo_tbl AS B ON A.b_hi_id = B.hi_id " +
+                    "WHERE 1");
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                BookingDAO bookingDAO = new BookingDAO();
+                bookingDAO.setB_id(rs.getString("b_id"));
+                bookingDAO.setB_ci_id(rs.getString("b_ci_id"));
+                bookingDAO.setB_hi_id(rs.getString("b_hi_id"));
+                bookingDAO.setB_startdate(rs.getString("b_startdate"));
+                bookingDAO.setB_enddate(rs.getString("b_enddate"));
+                bookingDAO.setB_duration(rs.getString("b_duration"));
+                bookingDAO.setB_duration(rs.getString("b_duration"));
+                bookingDAO.setB_personalname(rs.getString("b_personalname"));
+                bookingDAO.setB_email(rs.getString("b_email"));
+                bookingDAO.setB_address(rs.getString("b_address"));
+                bookingDAO.setB_country(rs.getString("b_country"));
+                bookingDAO.setB_state(rs.getString("b_state"));
+                bookingDAO.setB_city(rs.getString("b_city"));
+                bookingDAO.setB_zipcode(rs.getString("b_zipcode"));
+                bookingDAO.setHelper_fullname(rs.getString("hi_fullname"));
+                bookingDAO.setHelper_username(rs.getString("hi_username"));
+                bookingDAOList.add(bookingDAO);
+            }
+
+            try {
+                if (stmt != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bookingDAOList;
+    }
+
+    @RequestMapping("/listofbooking")
+    public ModelAndView listofbooking(HttpSession session) {
+        if (session.getAttribute("ai_username") == null) {
+            return new ModelAndView(new RedirectView("adminlogin"));
+        }
+
+        ModelAndView mv = new ModelAndView("ListBookingPage");
+        mv.addObject("bookingDAOList", getBookingDAOList());
+        return mv;
     }
 }

@@ -41,6 +41,12 @@ public class ChitChatController {
 
     }
 
+    @RequestMapping("chitchatdescription")
+    public static ModelAndView chitchatdescription(HttpSession session) {
+            ModelAndView mv = new ModelAndView("ChitChatDescriptionPage");
+            return mv;
+    }
+
     @RequestMapping("retrievechitchatlist")
     @ResponseBody
     public static String retrievechitchatlist(@RequestParam("id") String id, HttpSession session) {
